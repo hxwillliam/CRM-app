@@ -1,0 +1,33 @@
+section {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.example-button-row {
+  max-width: 600px;
+}
+
+button {
+  background-color: #1e1f20;
+  color: white; 
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 0 5px 5px 0; 
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  height: 50px;
+}
+
+button:hover {
+  background-color: #0056b3; 
+  transform: scale(1.05); 
+}
+
+button:focus {
+  outline: none; 
+  box-shadow: 0 0 0 2px rgba(0,123,255,.5);
+}

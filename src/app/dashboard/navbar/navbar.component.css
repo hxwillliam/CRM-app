@@ -1,0 +1,8 @@
+
+#header{
+  display: flex;
+  justify-content: space-between;
+  background-color: #17161a;
+  color: #00dddd;
+  opacity: 70%;
+}

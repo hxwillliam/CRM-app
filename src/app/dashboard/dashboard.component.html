@@ -1,0 +1,38 @@
+<head>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+
+<app-navbar/>
+<div id="container">
+	<app-add-user/>
+	
+	<mat-drawer-container class="example-container">
+		<mat-drawer mode="over" [opened]="selectedUser !== null">
+			<app-user-modal [userToEdit]="selectedUser"></app-user-modal>
+		</mat-drawer>
+		<mat-drawer-content>
+			<ng-container *ngFor="let user of filteredUsers; trackBy: trackByUserId">
+				<article class="user-info">
+					<h4>
+						{{ user.name }} {{ user.lastname }}
+					</h4>
+					<p>
+						{{ user.role }}
+					</p>
+					<p>
+						{{ user.date  | date:'MMMM d, y'  }}
+					</p>
+					
+					<span class="buttons">
+						<button (click)="toggleDrawer(user)">
+							<i class="material-icons">edit</i>
+						</button>
+						<app-delete (click)="handleUserDeleted(this.user.id)"/>
+					</span>
+				</article>
+			</ng-container>
+		</mat-drawer-content>
+	</mat-drawer-container>
+</div>

@@ -1,0 +1,51 @@
+article{
+    background-color: rgb(85, 133, 137);
+    padding: 3%;
+    border-radius: 4%;
+    width: 215px;
+    color: #00dddd;
+}
+span{
+    display: flex;
+    justify-content: end;
+}
+.modalButtons{
+    color: #00dddd;
+    background-color: #545b62;
+    border-radius: 10%;
+    border: none;
+    padding: 3%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 3%;
+}
+
+.user-modal-container {
+    position: relative; 
+    margin: 0 auto;
+    max-width: 600px; 
+    width: 100%; 
+    background-color: transparent;
+    z-index: 100;
+    padding: 20px;
+    box-sizing: border-box; 
+}
+
+.mat-sidenav-container {
+    height: 430px; 
+    background-color: transparent;
+}
+
+mat-form-field {
+    width: 100%; 
+    margin-bottom: 10px;
+}
+
+.mat-sidenav-container{
+    border-radius: 10px;
+}
+
+mat-sidenav{
+    background-color: #17161a;
+    opacity: 70%;
+}

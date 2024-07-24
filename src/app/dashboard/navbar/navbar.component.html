@@ -1,0 +1,17 @@
+<mat-toolbar id="header">
+    <button mat-button [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item class="menuItems" (click)="filterByRole('Software Developer')">Software Developer</button>
+      <button mat-menu-item class="menuItems" (click)="filterByRole('Data Engineer')">Data Engineer</button>
+      <button mat-menu-item class="menuItems" (click)="filterByRole('Network Engineer')">Network Engineer</button>
+      <button mat-menu-item class="menuItems" (click)="filterByRole('Machine Learning researcher')">Machine Learning researcher</button>
+      <button mat-menu-item class="menuItems" (click)="filterByRole('Business operations staff')">Business operations staff</button>
+    </mat-menu>
+
+    <span>Demo App</span>
+    <button mat-icon-button (click)="navigateToCalendar()">
+      <i class="material-icons">calendar_month</i>
+    </button>
+  </mat-toolbar>

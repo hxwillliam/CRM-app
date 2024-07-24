@@ -1,0 +1,38 @@
+<div class="modal-overlay">
+	<mat-sidenav-container class="example-container">
+	  <mat-sidenav #sidenav mode="side" opened="true" class="sidenav">
+		<section class="user-modal-container">
+		  <mat-form-field>
+			<mat-label>Name</mat-label>
+			<input matInput [(ngModel)]="name">
+		  </mat-form-field>
+		  
+		  <mat-form-field>
+			<mat-label>Lastame</mat-label>
+			<input matInput [(ngModel)]="lastname">
+		  </mat-form-field>
+		  
+		  <mat-form-field>
+			<mat-label>Date</mat-label>
+			<input matInput type="date" [(ngModel)]="date">
+		  </mat-form-field>
+		  
+		  <mat-form-field>
+			<mat-label>Role</mat-label>
+			<mat-select [(ngModel)]="role">
+			  <mat-option value="Software Developer">Software Developer</mat-option>
+			  <mat-option value="Data Engineer">Data Engineer</mat-option>
+			  <mat-option value="Network Engineer">Network Engineer</mat-option>
+			  <mat-option value="Machine Learning researcher">Machine Learning researcher</mat-option>
+			  <mat-option value="Business operations staff">Business operations staff</mat-option>
+			</mat-select>
+		  </mat-form-field>
+		  <span>
+			<!-- <button (click)="closeSidenav()">Cancel</button> -->
+			<button class="modalButtons" mat-flat-button (click)="onSave()">Save</button>
+		  </span>
+		</section>
+	  </mat-sidenav>
+
+	</mat-sidenav-container>
+</div>
