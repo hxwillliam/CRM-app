@@ -3,11 +3,12 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CalendarEvent, CalendarModule, CalendarView } from 'angular-calendar';
 import { colors } from './colors';
 import { CommonModule } from '@angular/common';
+import { CalendarHeaderComponent } from './calendar-header.component';
 
 @Component({
-  selector: 'mwl-demo-utils-calendar-header',
+  selector: 'mwl-demo-calendar',
   standalone: true,
-  imports: [CalendarModule, CommonModule],
+  imports: [CalendarModule, CommonModule, CalendarHeaderComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './calendar.component.html',
 })

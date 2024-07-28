@@ -1,8 +1,10 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { CalendarView } from 'angular-calendar';
+import { CalendarModule, CalendarView } from 'angular-calendar';
 
 @Component({
   selector: 'mwl-demo-utils-calendar-header',
+  standalone: true,
+  imports: [CalendarModule],
   template: `
     <div class="row text-center">
       <div class="col-md-4">
@@ -68,9 +70,9 @@ import { CalendarView } from 'angular-calendar';
   `,
 })
 export class CalendarHeaderComponent {
-  @Input() view: CalendarView;
+  @Input() view!: CalendarView;
 
-  @Input() viewDate: Date;
+  @Input() viewDate!: Date;
 
   @Input() locale: string = 'en';
 

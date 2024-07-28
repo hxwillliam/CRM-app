@@ -12,9 +12,8 @@ import { CalendarComponent } from './calendar.component';
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
-    DemoUtilsModule,
+    DemoUtilsModule, CalendarComponent
   ],
-  declarations: [CalendarComponent],
   exports: [CalendarComponent],
 })
 export class DemoModule {}
