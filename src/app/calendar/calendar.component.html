@@ -1,5 +1,4 @@
-<mwl-demo-utils-calendar-header [(view)]="view" [(viewDate)]="viewDate">
-</mwl-demo-utils-calendar-header>
+<mwl-demo-utils-calendar-header [(view)]="view" [(viewDate)]="viewDate"/>
 
 <div [ngSwitch]="view">
   <mwl-calendar-month-view
@@ -22,3 +21,4 @@
   >
   </mwl-calendar-day-view>
 </div>
+<button (click)="openModal()">Add event</button>

@@ -1,78 +1,20 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { CalendarModule, CalendarView } from 'angular-calendar';
+import { CalendarModule, CalendarView, CalendarEvent } from 'angular-calendar';
 
 @Component({
   selector: 'mwl-demo-utils-calendar-header',
   standalone: true,
-  imports: [CalendarModule],
-  template: `
-    <div class="row text-center">
-      <div class="col-md-4">
-        <div class="btn-group">
-          <div
-            class="btn btn-primary"
-            mwlCalendarPreviousView
-            [view]="view"
-            [(viewDate)]="viewDate"
-            (viewDateChange)="viewDateChange.next(viewDate)"
-          >
-            Previous
-          </div>
-          <div
-            class="btn btn-outline-secondary"
-            mwlCalendarToday
-            [(viewDate)]="viewDate"
-            (viewDateChange)="viewDateChange.next(viewDate)"
-          >
-            Today
-          </div>
-          <div
-            class="btn btn-primary"
-            mwlCalendarNextView
-            [view]="view"
-            [(viewDate)]="viewDate"
-            (viewDateChange)="viewDateChange.next(viewDate)"
-          >
-            Next
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <h3>{{ viewDate | calendarDate: view + 'ViewTitle':locale }}</h3>
-      </div>
-      <div class="col-md-4">
-        <div class="btn-group">
-          <div
-            class="btn btn-primary"
-            (click)="viewChange.emit(CalendarView.Month)"
-            [class.active]="view === CalendarView.Month"
-          >
-            Month
-          </div>
-          <div
-            class="btn btn-primary"
-            (click)="viewChange.emit(CalendarView.Week)"
-            [class.active]="view === CalendarView.Week"
-          >
-            Week
-          </div>
-          <div
-            class="btn btn-primary"
-            (click)="viewChange.emit(CalendarView.Day)"
-            [class.active]="view === CalendarView.Day"
-          >
-            Day
-          </div>
-        </div>
-      </div>
-    </div>
-    <br />
-  `,
+  imports: [CalendarModule, CommonModule],
+  styleUrl: './calendar-header.component.css',
+  templateUrl: 'calendar-header.component.html'
 })
 export class CalendarHeaderComponent {
   @Input() view!: CalendarView;
 
   @Input() viewDate!: Date;
+
+  @Input() events: CalendarEvent[] = [];
 
   @Input() locale: string = 'en';
 
@@ -81,4 +23,9 @@ export class CalendarHeaderComponent {
   @Output() viewDateChange = new EventEmitter<Date>();
 
   CalendarView = CalendarView;
+
+  changeView(view: CalendarView): void {
+    this.view = view;
+    this.viewChange.emit(view);
+  }
 }

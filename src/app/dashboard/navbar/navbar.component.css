@@ -2,7 +2,7 @@
 #header{
   display: flex;
   justify-content: space-between;
-  background-color: #17161a;
+  background-color: #020202;
   color: #00dddd;
-  opacity: 70%;
+  opacity: 85%;
 }

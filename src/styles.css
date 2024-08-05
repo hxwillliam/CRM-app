@@ -3,5 +3,37 @@ html, body { height: 100%; }
 body { 
 	margin: 0;
 	font-family: 'Montserrat', sans-serif;
-	background: linear-gradient(to right, #2c363f, #3b4e37);
+	background-color: whitesmoke;
+}
+
+.tab-content {
+  opacity: 0;
+  transition: opacity 17s ease-in-out;
+}
+
+.tab-content.active {
+  opacity: 1;
+}
+
+mwl-calendar-open-day-events{
+  display: none;
+}
+
+mat-dialog-container {
+  width: 80vw !important; 
+  max-width: none;
+}
+
+mat-dialog-content {
+  padding: 20px;
+  background-color: rgba(245, 245, 245, 0.9) !important;
+  overflow-x: hidden;     
+}
+
+.mat-mdc-dialog-container {
+  min-width: none !important;
+  max-width: none !important;
+}
+.mat-mdc-dialog-content{
+  overflow-y: hidden !important;
 }

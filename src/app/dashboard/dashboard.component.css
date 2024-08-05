@@ -2,6 +2,8 @@
 
 #container{
     display: flex;
+    background: linear-gradient(to right, #2c363f, #6c766a);
+    height: 100svh;
 }
 
 mat-drawer-container {
