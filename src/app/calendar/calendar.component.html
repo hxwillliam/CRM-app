@@ -22,3 +22,11 @@
   </mwl-calendar-day-view>
 </div>
 <button (click)="openModal()">Add event</button>
+
+<section class="loggedEvents">
+  <article *ngFor="let event of getFilteredEvents()" (click)="openModal(event)">
+    <h3>{{ event.title }}</h3>
+    <p>{{ event.start | date: 'short' }}</p>
+    <p>{{ event.description }}</p>
+  </article>
+</section>

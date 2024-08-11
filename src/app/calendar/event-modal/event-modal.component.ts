@@ -10,10 +10,12 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDatepicker, MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { CalendarService } from '../calendar.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export interface Event {
   title: string;
-  date: Date;
+  start: Date;
   time: string;
   description: string;
 }
@@ -33,26 +35,30 @@ export interface Event {
     MatIconModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatTableModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class EventModalComponent implements OnInit{
-  
+export class EventModalComponent implements OnInit {
   dataSource = new MatTableDataSource<Event>(); 
   dataArray: Event[] = [];
   displayedColumns: string[] = ['title', 'time', 'description', 'actions'];
-  event: Event = { title: '', date: new Date(), time: '', description: '' };
-  
+  event: Event = { title: '', start: new Date(), time: '', description: '' };
+
   constructor(
     public dialogRef: MatDialogRef<EventModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private calendarService: CalendarService,
+    private snackBar: MatSnackBar
+  ) {
+    this.event = data.event || { title: '', start: new Date(), description: '' };
+  }
 
   ngOnInit() {
     if (this.data && this.data.events) {
       this.dataArray = this.data.events;
     } else {
-      this.dataArray = [{ title: '', date: new Date(), time: '', description: '' }];
+      this.dataArray = [{ title: '', start: new Date(), time: '', description: '' }];
     }
     this.dataSource.data = this.dataArray;
   }
@@ -62,15 +68,41 @@ export class EventModalComponent implements OnInit{
   }
 
   saveEvent(element: Event) {
-    const index = this.dataArray.findIndex(event => event === element);
-    if (index !== -1) {
-      this.dataArray[index] = element;
-      this.dataSource.data = [...this.dataArray];
-    }
+    this.calendarService.addEvent(element).subscribe((success: boolean) => {
+      if (success) {
+        const index = this.dataArray.findIndex((event: Event) => event.title === element.title);
+        if (index !== -1) {
+          this.dataArray[index] = element;
+        } else {
+          this.dataArray.push(element);
+        }
+        this.dataSource.data = [...this.dataArray];
+        this.snackBar.open('Event saved successfully!', 'Close', { duration: 3000 });
+  
+        const parentEvents = this.data.events;
+        const parentIndex = parentEvents.findIndex((e: Event) => e.title === element.title);
+        if (parentIndex !== -1) {
+          parentEvents[parentIndex] = element;
+        } else {
+          parentEvents.push(element);
+        }
+  
+        this.dialogRef.close(element);
+      } else {
+        this.snackBar.open('Failed to save event.', 'Close', { duration: 3000 });
+      }
+    });
   }
 
   deleteEvent(element: Event) {
-    this.dataArray = this.dataArray.filter(event => event !== element);
-    this.dataSource.data = [...this.dataArray];
+    this.calendarService.deleteEvent(element).subscribe(success => {
+      if (success) {
+        this.dataArray = this.dataArray.filter(event => event !== element);
+        this.dataSource.data = [...this.dataArray];
+        this.snackBar.open('Event deleted successfully!', 'Close', { duration: 3000 });
+      } else {
+        this.snackBar.open('Failed to delete event.', 'Close', { duration: 3000 });
+      }
+    });
   }
 }
