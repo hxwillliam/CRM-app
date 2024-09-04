@@ -1,10 +1,16 @@
-import { Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { AuthGuardService } from './authGuard/auth-guard.service';
 import { CalendarComponent } from './calendar/calendar.component';
 import { LoginUserComponent } from './login-user/login-user.component';
 
-const routeConfig: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'calendar', component: CalendarComponent, title: 'Calendar' },
-  { path: 'login', component: LoginUserComponent },
+export const routes: Routes = [
+    { path: '', component: LoginUserComponent, title: 'Login' },
+    { path: 'calendar', component: CalendarComponent, title: 'Calendar' },
 ];
-export default routeConfig;
+
+@NgModule({
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
+  })
+  export class AppRoutingModule { }

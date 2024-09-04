@@ -10,9 +10,4 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'demo-app';
-  // selectedRole: string = ''; 
-
-  // onRoleSelected(role: any) {
-  //   this.selectedRole = role;
-  // }
 }
