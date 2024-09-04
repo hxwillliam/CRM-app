@@ -6,18 +6,21 @@ import { CalendarModule } from 'angular-calendar';
 import { DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { StoreModule } from '@ngrx/store';
+import routeConfig from './app.routes';
 
 
 export const appConfig: ApplicationConfig = {
-  providers: [importProvidersFrom(BrowserModule), 
+  providers: [importProvidersFrom(BrowserModule),
+    provideRouter(routeConfig),
     importProvidersFrom(BrowserAnimationsModule), 
-    importProvidersFrom(CalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory,
-      })
-    ),
+    importProvidersFrom(CalendarModule),
     importProvidersFrom(BrowserAnimationsModule),provideRouter([]),
     importProvidersFrom(MatDialogModule),
-    importProvidersFrom(MatDialogRef)
+    importProvidersFrom(MatDialogRef),
+    importProvidersFrom(FullCalendarModule),
+    importProvidersFrom( StoreModule.forRoot(),
+    )
   ],
 };

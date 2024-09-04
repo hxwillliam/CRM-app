@@ -1,32 +1,39 @@
-<mwl-demo-utils-calendar-header [(view)]="view" [(viewDate)]="viewDate"/>
+<div class="demo-app">
+  <div class="demo-app-sidebar">
+    <div class="demo-app-sidebar-section">
+      <ul>
+        <li>Select dates and you will be prompted to create a new event</li>
+        <li>Drag, drop, and resize events</li>
+        <li>Click an event to delete it</li>
+      </ul>
+    </div>
+    <div class="demo-app-sidebar-section">
+      <label class="toggle-label">
+        <input
+          type="checkbox"
+          [checked]="calendarOptions().weekends"
+          (change)="handleWeekendsToggle()"
+        />
+        <span class="toggle-text">Toggle weekends</span>
+      </label>
+    </div>
+    <div class="demo-app-sidebar-section">
+      <h2>All Events ({{ currentEvents().length }})</h2>
+      <ul>
+        <li *ngFor="let event of currentEvents()">
+          <b>{{ event.startStr }}</b>
+          <i>{{ event.title }}</i>
+        </li>
+      </ul>
+    </div>
+  </div>
 
-<div [ngSwitch]="view">
-  <mwl-calendar-month-view
-    *ngSwitchCase="'month'"
-    [viewDate]="viewDate"
-    [events]="events"
-    [activeDayIsOpen]="true"
-  >
-  </mwl-calendar-month-view>
-  <mwl-calendar-week-view
-    *ngSwitchCase="'week'"
-    [viewDate]="viewDate"
-    [events]="events"
-  >
-  </mwl-calendar-week-view>
-  <mwl-calendar-day-view
-    *ngSwitchCase="'day'"
-    [viewDate]="viewDate"
-    [events]="events"
-  >
-  </mwl-calendar-day-view>
+  <div class="demo-app-main">
+    <full-calendar *ngIf="calendarVisible()" [options]="calendarOptions()">
+      <ng-template #eventContent let-arg>
+        <b>{{ arg.timeText }}</b>
+        <i>{{ arg.event.title }}</i>
+      </ng-template>
+    </full-calendar>
+  </div>
 </div>
-<button (click)="openModal()">Add event</button>
-
-<section class="loggedEvents">
-  <article *ngFor="let event of getFilteredEvents()" (click)="openModal(event)">
-    <h3>{{ event.title }}</h3>
-    <p>{{ event.start | date: 'short' }}</p>
-    <p>{{ event.description }}</p>
-  </article>
-</section>
