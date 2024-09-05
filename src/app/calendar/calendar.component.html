@@ -8,6 +8,9 @@
       </ul>
     </div>
     <div class="demo-app-sidebar-section">
+      <button (click)="addEvent()">Add Event</button>
+    </div>
+    <div class="demo-app-sidebar-section">
       <label class="toggle-label">
         <input
           type="checkbox"
@@ -17,7 +20,7 @@
         <span class="toggle-text">Toggle weekends</span>
       </label>
     </div>
-    <div class="demo-app-sidebar-section">
+    <div id="allevents">
       <h2>All Events ({{ currentEvents().length }})</h2>
       <ul>
         <li *ngFor="let event of currentEvents()">
@@ -36,4 +39,4 @@
       </ng-template>
     </full-calendar>
   </div>
-</div>
+</div> 

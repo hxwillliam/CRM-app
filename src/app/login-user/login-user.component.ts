@@ -13,7 +13,12 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './login-user.component.css'
 })
 export class LoginUserComponent {
-  constructor(private authService: AuthService, private router: Router,
+
+loading: boolean = false;
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
     private _route: ActivatedRoute
   ) {
     this._route.queryParams.subscribe(params => {
@@ -29,17 +34,23 @@ export class LoginUserComponent {
   }
   urlToRedirect: string = 'calendar';
 
+ 
   loginUser() {
+    this.loading = true;
+    console.log('Loading started'); // Debug log
     this.authService.loginUser(this.logInfo).subscribe({
-      next: (data)=>{
+      next: (data) => {
         this.token = data;
         localStorage.setItem('token', data);
-        this.router.navigateByUrl(this.urlToRedirect)
-  
+        this.router.navigateByUrl(this.urlToRedirect);
+        this.loading = false;
+        console.log('Loading finished'); // Debug log
       },
-      error: (msg)=>{
-        console.log(msg)
+      error: (msg) => {
+        console.log(msg);
+        this.loading = false;
+        console.log('Loading finished with error'); // Debug log
       }
-    })
+    });
   }
 }

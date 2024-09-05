@@ -75,3 +75,26 @@ i {
   max-width: 1100px;
   margin: 0 auto;
 }
+
+#allevents{
+  padding: 5%;
+
+
+}
+
+.demo-app-sidebar button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 75px;
+}
+
+.demo-app-sidebar button:hover {
+  background-color: #0056b3;
+}

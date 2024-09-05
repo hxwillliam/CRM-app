@@ -6,18 +6,23 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { StoreModule } from '@ngrx/store';
 import { routes } from './app.routes';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from './app.routes';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 
 
 export const appConfig: ApplicationConfig = {
   providers: [importProvidersFrom(BrowserModule),
     provideRouter(routes),
+    importProvidersFrom(AppRoutingModule),
+    importProvidersFrom(HttpClient),
     importProvidersFrom(BrowserAnimationsModule),
     importProvidersFrom(BrowserAnimationsModule),provideRouter([]),
     importProvidersFrom(MatDialogModule),
     importProvidersFrom(MatDialogRef),
     importProvidersFrom(FullCalendarModule),
     importProvidersFrom( StoreModule.forRoot(),
-    )
+    ), provideAnimationsAsync()
   ],
 };

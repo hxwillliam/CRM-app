@@ -8,6 +8,9 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import { INITIAL_EVENTS, createEventId } from './event-utils';
+import { MatDialog } from '@angular/material/dialog';
+import { AddEventComponent } from './add-event/add-event.component';
+
 
 @Component({
   selector: 'app-root',
@@ -45,7 +48,20 @@ export class CalendarComponent {
   });
   currentEvents = signal<EventApi[]>([]);
 
-  constructor(private changeDetector: ChangeDetectorRef) {
+  constructor(private changeDetector: ChangeDetectorRef,  public dialog: MatDialog) {
+  }
+
+
+  addEvent(): void {
+    const dialogRef = this.dialog.open(AddEventComponent, {
+      width: '350px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('Event added:', result);
+      }
+    });
   }
 
   handleWeekendsToggle() {
