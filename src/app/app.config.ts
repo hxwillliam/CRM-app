@@ -9,6 +9,7 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { StoreModule } from '@ngrx/store';
 import routeConfig from './app.routes';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 
 
 export const appConfig: ApplicationConfig = {
@@ -21,6 +22,7 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(MatDialogRef),
     importProvidersFrom(FullCalendarModule),
     importProvidersFrom( StoreModule.forRoot(),
-    )
+    ),
+    provideHttpClient(withFetch())
   ],
 };
