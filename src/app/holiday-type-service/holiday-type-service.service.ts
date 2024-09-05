@@ -18,17 +18,14 @@ export class HolidayTypeServiceService {
     return this.http.get<HolidayType[]>(this.holidayUrl);
   }
 
-  public addHolidayType(user: HolidayType) {
-    return this.http.post<HolidayType>(this.holidayUrl, HolidayType);
-  }
 
   public deleteHolidayType(holidayType: HolidayType){
     const url = `${this.holidayUrl}/${holidayType.idHolidayType}`; 
     return this.http.delete<void>(url)
   }
 
-  public modifyHolidayType(id:number, holiday: HolidayType){
+  public getHolidayTypeById(id : number){
     const url = `${this.holidayUrl}/${id}`; 
-    return this.http.put<HolidayType>(url,holiday)
+    return this.http.get<HolidayType>(url)
   }
 }

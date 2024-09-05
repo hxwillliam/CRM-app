@@ -4,6 +4,7 @@ import { AuthGuardService } from './authGuard/auth-guard.service';
 import { CalendarComponent } from './calendar/calendar.component';
 import { LoginUserComponent } from './login-user/login-user.component';
 
+
 export const routes: Routes = [
     { path: '', component: LoginUserComponent, title: 'Login' },
     { path: 'calendar', component: CalendarComponent, title: 'Calendar', canActivate: [AuthGuardService] },

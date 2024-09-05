@@ -1,4 +1,4 @@
-import { Component , signal, ChangeDetectorRef } from '@angular/core';
+import { Component, signal, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { FullCalendarModule } from '@fullcalendar/angular';
@@ -8,6 +8,10 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import { INITIAL_EVENTS, createEventId } from './event-utils';
+import { Holiday } from '../model/holiday';
+import { HolidayServiceService } from '../holiday-service/holiday-service.service';
+import { HolidayTypeServiceService } from '../holiday-type-service/holiday-type-service.service';
+import { HolidayType } from '../model/holiday-type';
 import { MatDialog } from '@angular/material/dialog';
 import { AddEventComponent } from './add-event/add-event.component';
 
@@ -21,6 +25,8 @@ import { AddEventComponent } from './add-event/add-event.component';
 })
 
 export class CalendarComponent {
+
+  INITIAL_EVENTS: any[] = []
 
   calendarVisible = signal(true);
   calendarOptions = signal<CalendarOptions>({
@@ -36,7 +42,6 @@ export class CalendarComponent {
       right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
     },
     initialView: 'dayGridMonth',
-    initialEvents: INITIAL_EVENTS, 
     editable: true,
     selectable: true,
     selectMirror: true,
@@ -44,12 +49,40 @@ export class CalendarComponent {
     select: this.handleDateSelect.bind(this),
     eventClick: this.handleEventClick.bind(this),
     eventsSet: this.handleEvents.bind(this)
-    
+
   });
   currentEvents = signal<EventApi[]>([]);
 
-  constructor(private changeDetector: ChangeDetectorRef,  public dialog: MatDialog) {
+  constructor(private changeDetector: ChangeDetectorRef,public dialog: MatDialog, private holidayService: HolidayServiceService, private holidayTypeService: HolidayTypeServiceService) {
   }
+
+  ngOnInit(): void {
+    this.getData();
+  }
+
+  getData() {
+    this.holidayService.getHolidays().subscribe((data: Holiday[]) => {
+     // let type: HolidayType 
+      this.INITIAL_EVENTS = data.map(
+        evt => {
+          //this.holidayTypeService.getHolidayTypeById(evt.holidayType!).subscribe((data: HolidayType)=>{
+          //  type = data
+            
+          //})
+          return {
+            id: evt.idHoliday,
+            title: evt.statusHoliday,
+            start: evt.dateHoliday,
+            end: evt.dateHolidayEnd,
+            
+          }
+        })
+        this.calendarOptions = signal<CalendarOptions>({
+          events: this.INITIAL_EVENTS,
+        });
+      console.log(this.INITIAL_EVENTS)
+
+
 
 
   addEvent(): void {
@@ -75,7 +108,7 @@ export class CalendarComponent {
     const title = prompt('Please enter a new title for your event');
     const calendarApi = selectInfo.view.calendar;
 
-    calendarApi.unselect(); 
+    calendarApi.unselect();
 
     if (title) {
       calendarApi.addEvent({
@@ -96,7 +129,7 @@ export class CalendarComponent {
 
   handleEvents(events: EventApi[]) {
     this.currentEvents.set(events);
-    this.changeDetector.detectChanges(); 
+    this.changeDetector.detectChanges();
   }
 
 }
