@@ -3,10 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuardService } from './authGuard/auth-guard.service';
 import { CalendarComponent } from './calendar/calendar.component';
 import { LoginUserComponent } from './login-user/login-user.component';
+import { AuthGuardService } from './authGuard/auth-guard.service';
 
-export const routes: Routes = [
-    { path: '', component: LoginUserComponent, title: 'Login' },
-    { path: 'calendar', component: CalendarComponent, title: 'Calendar' },
+
+const routeConfig: Routes = [
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'calendar', component: CalendarComponent, canActivate: [AuthGuardService] },
+  { path: 'login', component: LoginUserComponent },
+
 ];
 
 @NgModule({
