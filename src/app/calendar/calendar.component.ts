@@ -53,7 +53,7 @@ export class CalendarComponent {
   });
   currentEvents = signal<EventApi[]>([]);
 
-  constructor(private changeDetector: ChangeDetectorRef,public dialog: MatDialog, private holidayService: HolidayServiceService, private holidayTypeService: HolidayTypeServiceService) {
+  constructor(private changeDetector: ChangeDetectorRef, public dialog: MatDialog, private holidayService: HolidayServiceService, private holidayTypeService: HolidayTypeServiceService) {
   }
 
   ngOnInit(): void {
@@ -62,25 +62,27 @@ export class CalendarComponent {
 
   getData() {
     this.holidayService.getHolidays().subscribe((data: Holiday[]) => {
-     // let type: HolidayType 
+      // let type: HolidayType 
       this.INITIAL_EVENTS = data.map(
         evt => {
           //this.holidayTypeService.getHolidayTypeById(evt.holidayType!).subscribe((data: HolidayType)=>{
           //  type = data
-            
+
           //})
           return {
             id: evt.idHoliday,
             title: evt.statusHoliday,
             start: evt.dateHoliday,
             end: evt.dateHolidayEnd,
-            
+
           }
         })
-        this.calendarOptions = signal<CalendarOptions>({
-          events: this.INITIAL_EVENTS,
-        });
+      this.calendarOptions = signal<CalendarOptions>({
+        events: this.INITIAL_EVENTS,
+      });
       console.log(this.INITIAL_EVENTS)
+    })
+  }
 
 
 
