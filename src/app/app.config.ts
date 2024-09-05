@@ -10,7 +10,6 @@ import { routes } from './app.routes';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import routeConfig from './app.routes';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 
 
@@ -28,6 +27,6 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom( StoreModule.forRoot(),
     ),
     provideHttpClient(withFetch())
-    ), provideAnimationsAsync()
+    ,provideAnimationsAsync()
   ],
 };

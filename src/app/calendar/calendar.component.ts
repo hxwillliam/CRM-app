@@ -82,7 +82,7 @@ export class CalendarComponent {
         });
       console.log(this.INITIAL_EVENTS)
 
-
+    })}
 
 
   addEvent(): void {
