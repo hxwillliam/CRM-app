@@ -59,16 +59,16 @@ export class CalendarComponent {
 
   getData() {
     this.holidayService.getHolidays().subscribe((data: Holiday[]) => {
-      let type: HolidayType 
+     // let type: HolidayType 
       this.INITIAL_EVENTS = data.map(
         evt => {
-          this.holidayTypeService.getHolidayTypeById(evt.holidayType!).subscribe((data: HolidayType)=>{
-            type = data
+          //this.holidayTypeService.getHolidayTypeById(evt.holidayType!).subscribe((data: HolidayType)=>{
+          //  type = data
             
-          })
+          //})
           return {
             id: evt.idHoliday,
-            title: type.types,
+            title: evt.statusHoliday,
             start: evt.dateHoliday,
             end: evt.dateHolidayEnd,
             

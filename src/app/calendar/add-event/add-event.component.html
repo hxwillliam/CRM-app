@@ -1,0 +1,25 @@
+<div class="dialog-content">
+  <div class="form-field">
+    <label for="eventTitle">Event Title</label>
+    <input id="eventTitle" type="text" [(ngModel)]="eventTitle">
+  </div>
+  <div class="form-field">
+    <label for="eventDate">Start Date</label>
+    <input id="eventDate" type="date" [(ngModel)]="eventDate">
+  </div>
+  <div class="form-field">
+    <label for="endDate">End Date</label>
+    <input id="endDate" type="date" [(ngModel)]="endDate">
+  </div>
+  <div class="form-field">
+    <label for="role">Role</label>
+    <select id="role" [(ngModel)]="role">
+      <option value="admin">Admin</option>
+      <option value="user">User</option>
+      <option value="guest">Guest</option>
+    </select>
+  </div>
+  <div class="dialog-actions">
+    <button (click)="onAddClick()">Add</button>
+  </div>
+</div>
