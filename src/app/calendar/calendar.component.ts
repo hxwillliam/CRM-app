@@ -12,6 +12,9 @@ import { Holiday } from '../model/holiday';
 import { HolidayServiceService } from '../holiday-service/holiday-service.service';
 import { HolidayTypeServiceService } from '../holiday-type-service/holiday-type-service.service';
 import { HolidayType } from '../model/holiday-type';
+import { MatDialog } from '@angular/material/dialog';
+import { AddEventComponent } from './add-event/add-event.component';
+
 
 @Component({
   selector: 'app-root',
@@ -50,7 +53,7 @@ export class CalendarComponent {
   });
   currentEvents = signal<EventApi[]>([]);
 
-  constructor(private changeDetector: ChangeDetectorRef, private holidayService: HolidayServiceService, private holidayTypeService: HolidayTypeServiceService) {
+  constructor(private changeDetector: ChangeDetectorRef,public dialog: MatDialog, private holidayService: HolidayServiceService, private holidayTypeService: HolidayTypeServiceService) {
   }
 
   ngOnInit(): void {
@@ -79,6 +82,18 @@ export class CalendarComponent {
         });
       console.log(this.INITIAL_EVENTS)
 
+
+
+
+  addEvent(): void {
+    const dialogRef = this.dialog.open(AddEventComponent, {
+      width: '350px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('Event added:', result);
+      }
     });
   }
 

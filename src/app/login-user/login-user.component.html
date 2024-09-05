@@ -9,7 +9,7 @@
         />
       </div>
       <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-        <form>
+        <form *ngIf="!loading; else loadingTemplate">
           <div
             class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start"
           >
@@ -105,6 +105,11 @@
             </p>
           </div>
         </form>
+        <ng-template #loadingTemplate>
+          <div class="text-center">
+            <h1>Page works but is loading...</h1>
+          </div>
+        </ng-template>
       </div>
     </div>
   </div>
